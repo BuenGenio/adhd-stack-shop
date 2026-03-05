@@ -1,6 +1,6 @@
 /* ── Stripe Config ─────────────────────────────────────────── */
 
-const STRIPE_PK = 'pk_live_51QcqsfA8xxsRaQqsniBvB2X4O0TD2PxriLg7KUc6IuVjlv2jyaswSChQkCaZZnAuEHkO3KqIeOikwuK8Mswzwr3d005CTs7yN0';
+const CHECKOUT_API = 'https://adhd-stack-checkout.adhd-stack.workers.dev';
 
 /* ── Product Data ──────────────────────────────────────────── */
 
@@ -337,14 +337,14 @@ function updateFooter(kit) {
   }
 }
 
-/* ── Checkout (client-side Stripe.js) ─────────────────────── */
+/* ── Checkout (server-side via Cloudflare Worker) ─────────── */
 
 async function handleCheckout(kitId) {
   const kit = KITS.find(k => k.id === kitId);
   if (!kit) return;
 
-  const selected = kit.items.filter(i => i.selected);
-  if (selected.length === 0) return;
+  const selectedItems = kit.items.filter(i => i.selected).map(i => i.id);
+  if (selectedItems.length === 0) return;
 
   const btn = document.querySelector(`.btn-checkout[data-kit="${kitId}"]`);
   if (btn) {
@@ -353,25 +353,18 @@ async function handleCheckout(kitId) {
   }
 
   try {
-    const stripe = Stripe(STRIPE_PK);
-    const allSelected = selected.length === kit.items.length;
-    const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
-
-    let lineItems;
-    if (allSelected) {
-      lineItems = [{ price: kit.bundlePriceId, quantity: 1 }];
-    } else {
-      lineItems = selected.map(item => ({ price: item.priceId, quantity: 1 }));
-    }
-
-    const { error } = await stripe.redirectToCheckout({
-      lineItems,
-      mode: 'payment',
-      successUrl: `${baseUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancelUrl: `${baseUrl}/`,
+    const res = await fetch(CHECKOUT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kitId, selectedItems }),
     });
 
-    if (error) throw error;
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Checkout failed');
+    }
   } catch (err) {
     console.error('Checkout failed:', err);
     if (btn) {
