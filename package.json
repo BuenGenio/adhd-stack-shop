@@ -1,0 +1,17 @@
+{
+  "name": "adhd-stack.shop",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "stripe": "^20.4.0",
+    "wrangler": "^4.70.0"
+  }
+}

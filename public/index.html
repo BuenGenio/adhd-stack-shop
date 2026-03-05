@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>adhd-stack.shop — Cognitive Enhancement Kits</title>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' https://js.stripe.com https://fonts.googleapis.com 'unsafe-inline';
+                 style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+                 font-src 'self' https://fonts.gstatic.com;
+                 frame-src https://js.stripe.com https://hooks.stripe.com;
+                 connect-src 'self' https://api.stripe.com https://fonts.googleapis.com https://fonts.gstatic.com;
+                 img-src 'self' data: https://*.stripe.com;">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://js.stripe.com/v3/" async></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <h1 class="logo">adhd-stack<span class="logo-dot">.shop</span></h1>
+        <p class="tagline">Cognitive Enhancement Kits</p>
+      </div>
+      <button class="btn-theme" id="btnTheme" title="Theme: Auto / Dark / Light">
+        <span class="btn-theme-icon" id="themeIcon">◐</span>
+        <span id="themeLabel">Auto</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="store">
+    <div class="container">
+      <div class="kits-grid" id="kits-grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Research compounds only &mdash; not for human consumption.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
