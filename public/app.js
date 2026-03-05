@@ -1,6 +1,6 @@
 /* ── Stripe Config ─────────────────────────────────────────── */
 
-const STRIPE_PK = 'pk_live_51PubiwBk4dLlmFduZWzVQ8aShRkuWOtW5yYvS2HrKMcPtWVmwjPt2p0JAdTTp1n90uQLIn4rDlSDKNgh2H13Ku0K00UNfXXH41';
+const STRIPE_PK = 'pk_live_51QcqsfA8xxsRaQqsniBvB2X4O0TD2PxriLg7KUc6IuVjlv2jyaswSChQkCaZZnAuEHkO3KqIeOikwuK8Mswzwr3d005CTs7yN0';
 
 /* ── Product Data ──────────────────────────────────────────── */
 
