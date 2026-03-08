@@ -22,6 +22,7 @@ const KITS = [
       { id: 'noopept',         name: 'Noopept',         dose: '30mg',   form: 'powder',  container: 'baggie', price: 22, selected: true, image: null, priceId: 'price_1T7YbsA8xxsRaQqsqLpYcagp' },
       { id: 'ldopa',           name: 'L-Dopa',          dose: '200mg',  form: 'powder',  container: 'baggie', price: 18, selected: true, image: null, priceId: 'price_1T7YbtA8xxsRaQqsZ7ApxIlR' },
       { id: '4f-modafinil',    name: '4F-Modafinil',    dose: '50mg',   form: 'powder',  container: 'baggie', price: 42, selected: true, image: null, priceId: 'price_1T7YbuA8xxsRaQqsZXccEFUN' },
+      { id: 'rape',            name: 'Rapé',            dose: '5g',     form: 'snuff',   container: 'jar',   price: 18, selected: true, image: null, priceId: 'price_1T7YbzA8xxsRaQqsZuXycVaq' },
       {
         id: 'speciosa-work',
         name: 'Speciosa Replacement',
@@ -51,9 +52,8 @@ const KITS = [
     bundlePriceId: 'price_1T7Yc4A8xxsRaQqsCQZHkwwK',
     items: [
       { id: 'nuciferine',  name: 'Nuciferine',  dose: '20mg',  form: 'extract', container: 'jar',   price: 24, selected: true, image: null, priceId: 'price_1T7YbwA8xxsRaQqs8WsK5PWW' },
-      { id: '2mxl',        name: '2MXL',         dose: '10ml',  form: 'spray',   container: 'spray', price: 28, selected: true, image: null, priceId: 'price_1T7YbxA8xxsRaQqs9j92Hgtg' },
+      /* { id: '2mxl',        name: '2MXL',         dose: '10ml',  form: 'spray',   container: 'spray', price: 28, selected: true, image: null, priceId: 'price_1T7YbxA8xxsRaQqs9j92Hgtg' }, */
       { id: 'kanna',       name: 'Kanna',        dose: '10ml',  form: 'spray',   container: 'spray', price: 22, selected: true, image: null, priceId: 'price_1T7YbyA8xxsRaQqseHxpEXkM' },
-      { id: 'rape',        name: 'Rapé',         dose: '5g',    form: 'snuff',   container: 'jar',   price: 18, selected: true, image: null, priceId: 'price_1T7YbzA8xxsRaQqsZuXycVaq' },
       { id: 'ashwagandha', name: 'Ashwagandha',  dose: '300mg', form: 'extract', container: 'jar',   price: 16, selected: true, image: null, priceId: 'price_1T7Yc0A8xxsRaQqstwogjcok' },
       { id: '4f-phenibut', name: '4F-Phenibut',  dose: '250mg', form: 'powder',  container: 'baggie', price: 20, selected: true, image: null, priceId: 'price_1T7Yc1A8xxsRaQqs7fU3v8aH' },
       {
@@ -423,6 +423,25 @@ async function handleCheckout(kitId) {
   });
 })();
 
+/* ── Sales Counter ────────────────────────────────────────── */
+
+function initSalesCounter() {
+  const BASE = 1000;
+  const LAUNCH = new Date('2025-06-01').getTime();
+  const daysSince = Math.max(0, Math.floor((Date.now() - LAUNCH) / 86400000));
+  const pseudo = daysSince * 3 + Math.floor(Math.sin(daysSince) * 2);
+  const total = BASE + pseudo;
+  const formatted = total.toLocaleString() + '+';
+
+  const headerEl = document.getElementById('salesCounter');
+  const footerEl = document.getElementById('salesCounterFooter');
+  if (headerEl) headerEl.textContent = formatted + ' kits sold';
+  if (footerEl) footerEl.textContent = formatted;
+}
+
 /* ── Init ─────────────────────────────────────────────────── */
 
-document.addEventListener('DOMContentLoaded', renderKits);
+document.addEventListener('DOMContentLoaded', () => {
+  renderKits();
+  initSalesCounter();
+});
