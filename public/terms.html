@@ -11,15 +11,17 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <header class="site-header">
     <div class="container header-row">
       <div>
-        <a href="/" class="logo-link"><h1 class="logo">adhd-stack<span class="logo-dot">.shop</span></h1></a>
+        <h1 class="logo"><a href="/" class="logo-link">adhd-stack<span class="logo-dot">.shop</span></a></h1>
       </div>
     </div>
   </header>
 
-  <main class="terms-page">
+  <main id="main-content" class="terms-page">
     <div class="container terms-container">
 
       <h2 class="terms-heading">Terms &amp; Conditions</h2>
@@ -82,14 +84,16 @@
         <p><strong>By completing a purchase you acknowledge that you have read and agree to these Terms &amp; Conditions in their entirety.</strong></p>
       </div>
 
-      <p class="terms-back"><a href="/">← Back to store</a></p>
+      <p class="terms-back"><a href="/" aria-label="Back to store">← Back to store</a></p>
 
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="/terms.html">Terms &amp; Conditions</a></p>
+      <nav aria-label="Legal">
+        <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="/terms.html" aria-current="page">Terms &amp; Conditions</a></p>
+      </nav>
     </div>
   </footer>
 

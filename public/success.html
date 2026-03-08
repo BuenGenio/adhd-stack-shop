@@ -11,17 +11,19 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <header class="site-header">
     <div class="container">
-      <h1 class="logo">adhd-stack<span class="logo-dot">.shop</span></h1>
+      <h1 class="logo"><a href="/" class="logo-link">adhd-stack<span class="logo-dot">.shop</span></a></h1>
     </div>
   </header>
 
-  <main class="store">
+  <main id="main-content" class="store">
     <div class="container">
-      <div class="success-card">
+      <div class="success-card" role="status">
         <div class="success-icon">
-          <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+          <svg viewBox="0 0 48 48" fill="none" width="48" height="48" role="img" aria-label="Success checkmark">
             <circle cx="24" cy="24" r="22" stroke="#22c55e" stroke-width="3"/>
             <polyline points="14,25 21,32 34,18" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
@@ -38,7 +40,9 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="/terms.html">Terms &amp; Conditions</a></p>
+      <nav aria-label="Legal">
+        <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="/terms.html">Terms &amp; Conditions</a></p>
+      </nav>
     </div>
   </footer>
 

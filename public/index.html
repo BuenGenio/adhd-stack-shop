@@ -18,9 +18,11 @@
 </head>
 <body>
 
-  <div class="cause-banner">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <aside class="cause-banner" aria-label="Charitable cause">
     <div class="container cause-banner-inner">
-      <svg class="cause-emblem" viewBox="0 0 40 48" fill="none" aria-label="Tryzub">
+      <svg class="cause-emblem" viewBox="0 0 40 48" fill="none" role="img" aria-label="Ukrainian tryzub emblem">
         <path d="M20 2 L20 14 M20 14 C16 14 12 18 12 24 L12 38 C12 38 16 42 20 46 C24 42 28 38 28 38 L28 24 C28 18 24 14 20 14Z
                M20 14 L20 34 M12 24 L16 20 L20 24 L24 20 L28 24 M8 38 L12 38 M28 38 L32 38
                M6 4 C6 4 10 8 14 14 M34 4 C34 4 30 8 26 14"
@@ -30,9 +32,9 @@
         <strong>15%</strong> of every kit sold supports ongoing public humanitarian projects in
         <strong>Ukraine</strong>
       </p>
-      <span class="cause-counter" id="salesCounter">1,000+ kits sold</span>
+      <span class="cause-counter" id="salesCounter" aria-live="polite">1,000+ kits sold</span>
     </div>
-  </div>
+  </aside>
 
   <header class="site-header">
     <div class="container header-row">
@@ -40,23 +42,23 @@
         <h1 class="logo">adhd-stack<span class="logo-dot">.shop</span></h1>
         <p class="tagline">Cognitive Enhancement Kits</p>
       </div>
-      <button class="btn-theme" id="btnTheme" title="Theme: Auto / Dark / Light">
-        <span class="btn-theme-icon" id="themeIcon">◐</span>
+      <button class="btn-theme" id="btnTheme" aria-label="Switch colour theme, currently Auto">
+        <span class="btn-theme-icon" id="themeIcon" aria-hidden="true">◐</span>
         <span id="themeLabel">Auto</span>
       </button>
     </div>
   </header>
 
-  <main class="store">
+  <main id="main-content" class="store">
     <div class="container">
-      <div class="kits-grid" id="kits-grid"></div>
+      <div class="kits-grid" id="kits-grid" role="list" aria-label="Product kits"></div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <div class="cause-footer">
-        <svg class="cause-emblem-sm" viewBox="0 0 40 48" fill="none" aria-label="Tryzub">
+      <div class="cause-footer" aria-label="Charitable impact">
+        <svg class="cause-emblem-sm" viewBox="0 0 40 48" fill="none" role="img" aria-label="Ukrainian tryzub emblem">
           <path d="M20 2 L20 14 M20 14 C16 14 12 18 12 24 L12 38 C12 38 16 42 20 46 C24 42 28 38 28 38 L28 24 C28 18 24 14 20 14Z
                  M20 14 L20 34 M12 24 L16 20 L20 24 L24 20 L28 24 M8 38 L12 38 M28 38 L32 38
                  M6 4 C6 4 10 8 14 14 M34 4 C34 4 30 8 26 14"
@@ -67,7 +69,9 @@
           &mdash; <strong id="salesCounterFooter">1,000+</strong> kits sold
         </p>
       </div>
-      <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="/terms.html">Terms &amp; Conditions</a></p>
+      <nav aria-label="Legal">
+        <p class="footer-legal">Research compounds only &mdash; not for human consumption. · <a href="terms.html">Terms &amp; Conditions</a></p>
+      </nav>
     </div>
   </footer>
 

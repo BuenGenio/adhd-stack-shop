@@ -52,6 +52,45 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Skip Link (ADA 2.4.1) ────────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 16px;
+  top: 0;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+/* ── Focus Visible (ADA 2.4.7) ───────────────────────────── */
+
+:focus-visible {
+  outline: 3px solid var(--kit-accent, #c28b0a);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* ── Layout ───────────────────────────────────────────────── */
 
 .container {
@@ -342,6 +381,10 @@ body {
   transition: max-height .5s cubic-bezier(.4,0,.2,1);
 }
 
+.kit-contents[hidden] {
+  display: block;
+}
+
 .expanded .kit-contents {
   max-height: 1200px;
 }
@@ -375,11 +418,12 @@ body {
 }
 
 .kit-item.deselected {
-  opacity: .35;
+  opacity: .55;
 }
 
-.kit-item.deselected:hover {
-  opacity: .55;
+.kit-item.deselected:hover,
+.kit-item.deselected:focus-within {
+  opacity: .75;
 }
 
 /* stagger animation */
@@ -636,8 +680,8 @@ body {
 }
 
 .footer-legal {
-  opacity: .5;
   margin-top: 4px;
+  color: var(--text-muted);
 }
 
 /* ── Success Page ─────────────────────────────────────────── */
@@ -832,4 +876,15 @@ body {
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
   .expanded .kit-bag { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Reduced Motion (WCAG 2.3.3) ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

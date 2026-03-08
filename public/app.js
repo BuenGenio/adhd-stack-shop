@@ -179,35 +179,42 @@ function renderKitCard(kit) {
   const selectedCount = kit.items.filter(i => i.selected).length;
   const totalItems = kit.items.length;
 
+  const isExpanded = state.expanded === kit.id;
+
   return `
-    <div class="kit-card ${state.expanded === kit.id ? 'expanded' : ''}"
+    <article class="kit-card ${isExpanded ? 'expanded' : ''}"
          data-kit="${kit.id}"
+         role="listitem"
          style="--kit-accent: ${kit.accent}; --kit-accent-light: ${kit.accentLight}">
-      <div class="kit-bag" data-action="toggle" data-kit="${kit.id}">
-        <div class="kit-bag-svg">${svgZipBag()}</div>
+      <div class="kit-bag" data-action="toggle" data-kit="${kit.id}"
+           role="button" tabindex="0"
+           aria-expanded="${isExpanded}"
+           aria-controls="kit-contents-${kit.id}"
+           aria-label="${kit.name}: ${kit.tagline}, ${kit.currency}${kit.price}. Activate to ${isExpanded ? 'collapse' : 'expand'}.">
+        <div class="kit-bag-svg" aria-hidden="true">${svgZipBag()}</div>
         <div class="kit-info">
           <h2 class="kit-name">${kit.name}</h2>
           <p class="kit-tagline">${kit.tagline}</p>
           <p class="kit-price">${kit.currency}${kit.price}</p>
-          <span class="kit-cta">Click to open</span>
+          <span class="kit-cta" aria-hidden="true">Click to open</span>
         </div>
       </div>
-      <div class="kit-contents">
-        <div class="kit-items">${itemsHtml}</div>
+      <div class="kit-contents" id="kit-contents-${kit.id}" role="region" aria-label="${kit.name} items"${isExpanded ? '' : ' hidden'}>
+        <div class="kit-items" role="list" aria-label="Items in ${kit.name}">${itemsHtml}</div>
         <div class="kit-footer">
-          <span class="kit-selected-count">
+          <span class="kit-selected-count" aria-live="polite">
             <strong id="count-${kit.id}">${selectedCount}</strong> / ${totalItems} selected
           </span>
-          <span class="kit-total" id="total-${kit.id}">
+          <span class="kit-total" id="total-${kit.id}" aria-live="polite" aria-label="Total price">
             ${kit.currency}${kit.price}
           </span>
           <button class="btn-checkout" data-action="checkout" data-kit="${kit.id}">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M1 1h2l1.5 8h8L15 3H4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="13" r="1.2" fill="currentColor"/><circle cx="11.5" cy="13" r="1.2" fill="currentColor"/></svg>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 1h2l1.5 8h8L15 3H4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="13" r="1.2" fill="currentColor"/><circle cx="11.5" cy="13" r="1.2" fill="currentColor"/></svg>
             Checkout
           </button>
         </div>
       </div>
-    </div>`;
+    </article>`;
 }
 
 function renderItems(kit) {
@@ -253,14 +260,17 @@ function renderItem(kit, item) {
     ? `<span class="item-form-tag">blend</span>`
     : '';
 
+  const a11yName = `${item.selected ? 'Deselect' : 'Select'} ${item.name}${item.dose ? ' ' + item.dose : ''}`;
+
   return `
-    <div class="kit-item ${item.selected ? '' : 'deselected'}" data-item="${item.id}" data-kit="${kit.id}">
+    <div class="kit-item ${item.selected ? '' : 'deselected'}" data-item="${item.id}" data-kit="${kit.id}" role="listitem">
       <label class="item-check">
         <input type="checkbox" ${item.selected ? 'checked' : ''}
+               aria-label="${a11yName}"
                data-action="select" data-kit="${kit.id}" data-item="${item.id}">
-        <span class="check-box">${svgCheck()}</span>
+        <span class="check-box" aria-hidden="true">${svgCheck()}</span>
       </label>
-      <div class="item-icon">${iconHtml}</div>
+      <div class="item-icon" aria-hidden="true">${iconHtml}</div>
       <div class="item-info">
         <span class="item-name">${item.name} ${formTag}</span>
         ${doseHtml}
@@ -273,15 +283,17 @@ function renderItem(kit, item) {
 /* ── Events ───────────────────────────────────────────────── */
 
 function bindEvents() {
-  document.querySelectorAll('.kit-card').forEach(card => {
-    card.addEventListener('click', e => {
+  document.querySelectorAll('[data-action="toggle"]').forEach(toggle => {
+    function activate(e) {
       if (e.target.closest('[data-action="select"]')) return;
       if (e.target.closest('[data-action="checkout"]')) return;
-      const kitId = card.dataset.kit;
-      if (!card.classList.contains('expanded')) {
-        toggleKit(kitId);
-      } else if (e.target.closest('.kit-bag')) {
-        toggleKit(kitId);
+      toggleKit(toggle.dataset.kit);
+    }
+    toggle.addEventListener('click', activate);
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activate(e);
       }
     });
   });
@@ -392,8 +404,11 @@ async function handleCheckout(kitId) {
     root.setAttribute('data-system', systemTheme());
     const lbl = document.getElementById('themeLabel');
     const ico = document.getElementById('themeIcon');
-    if (lbl) lbl.textContent = theme[0].toUpperCase() + theme.slice(1);
+    const btn = document.getElementById('btnTheme');
+    const label = theme[0].toUpperCase() + theme.slice(1);
+    if (lbl) lbl.textContent = label;
     if (ico) ico.textContent = theme === 'auto' ? '◐' : theme === 'dark' ? '☾' : '☼';
+    if (btn) btn.setAttribute('aria-label', `Switch colour theme, currently ${label}`);
   }
 
   function getTheme() {
