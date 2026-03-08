@@ -54,6 +54,7 @@ const KITS = [
       { id: 'nuciferine',  name: 'Nuciferine',  dose: '20mg',  form: 'extract', container: 'jar',   price: 24, selected: true, image: null, priceId: 'price_1T7YbwA8xxsRaQqs8WsK5PWW' },
       /* { id: '2mxl',        name: '2MXL',         dose: '10ml',  form: 'spray',   container: 'spray', price: 28, selected: true, image: null, priceId: 'price_1T7YbxA8xxsRaQqs9j92Hgtg' }, */
       { id: 'kanna',       name: 'Kanna',        dose: '10ml',  form: 'spray',   container: 'spray', price: 22, selected: true, image: null, priceId: 'price_1T7YbyA8xxsRaQqseHxpEXkM' },
+      { id: 'nac',          name: 'NAC',           dose: '600mg', form: 'powder',  container: 'baggie', price: 14, selected: true, image: null, priceId: null },
       { id: 'ashwagandha', name: 'Ashwagandha',  dose: '300mg', form: 'extract', container: 'jar',   price: 16, selected: true, image: null, priceId: 'price_1T7Yc0A8xxsRaQqstwogjcok' },
       { id: '4f-phenibut', name: '4F-Phenibut',  dose: '250mg', form: 'powder',  container: 'baggie', price: 20, selected: true, image: null, priceId: 'price_1T7Yc1A8xxsRaQqs7fU3v8aH' },
       {
@@ -141,7 +142,7 @@ function svgSpray() {
     <rect x="12" y="24" width="14" height="22" rx="3" stroke="currentColor" stroke-width="1.4"/>
     <rect x="15" y="17" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
     <rect x="13" y="11" width="12" height="8" rx="2.5" stroke="currentColor" stroke-width="1.4"/>
-    <path d="M25 14 L31 12 L31 14.5 L25 16.5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+    <path d="M25 14 L31 12 L31 14.5 L25 16.'rape':          { name: 'Rapé 5g',                      price: 18 },5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
     <line x1="32" y1="11" x2="36" y2="10" stroke="currentColor" stroke-width=".9" opacity=".45"/>
     <line x1="32" y1="13.2" x2="37" y2="13.2" stroke="currentColor" stroke-width=".9" opacity=".45"/>
     <line x1="32" y1="15.5" x2="36" y2="16.5" stroke="currentColor" stroke-width=".9" opacity=".45"/>

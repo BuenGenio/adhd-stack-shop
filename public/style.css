@@ -713,6 +713,98 @@ body {
   height: 16px;
 }
 
+/* ── Terms Page ───────────────────────────────────────────── */
+
+.terms-page {
+  flex: 1;
+  padding: 48px 0 64px;
+}
+
+.terms-container {
+  max-width: 740px;
+}
+
+.terms-heading {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.terms-updated {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.terms-container > h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+
+.terms-container > p {
+  font-size: .88rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.terms-container > ul {
+  margin: 0 0 12px 20px;
+  font-size: .86rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.terms-container > ul li + li {
+  margin-top: 4px;
+}
+
+.terms-acknowledgement {
+  margin-top: 36px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .88rem;
+  line-height: 1.6;
+}
+
+.terms-back {
+  margin-top: 24px;
+  font-size: .85rem;
+}
+
+.terms-back a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.terms-back a:hover {
+  color: var(--text);
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Footer Link ──────────────────────────────────────────── */
+
+.footer-legal a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color .2s, border-color .2s;
+}
+
+.footer-legal a:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
 
 @media (max-width: 720px) {
